@@ -45,14 +45,15 @@ def list_instances():
     for instance in ec2.instances.all():
         tags = [i for i in instance.tags if i.get('Value') == 'Cron']  
 
-        # if len(tags)>0:
-        instances[instance.id] = {
-            "type": instance.instance_type,
-            "public_ip": instance.public_ip_address,
-            "state": instance.state.get('Name'),
-            # "tag": tags
-            
-            }
+         if len(tags)>0:
+            instances[instance.id] = {
+                "id": instance.id,
+                "type": instance.instance_type,
+                "public_ip": instance.public_ip_address,
+                "state": instance.state.get('Name'),
+                # "tag": tags
+                
+                }
         
     for i in instances.items():
         print(i)
@@ -89,6 +90,7 @@ def reboot_instance(INSTANCE_ID):
 
 def lambda_handler(event, context):
     print(event)
+    instances = list_instances()
     elif event.get('action') == 'start':
         for i in instances.items():
             ins_id = i.id
