@@ -108,5 +108,5 @@ def lambda_handler(event, context):
 
 ### Setup 2 cron's for lambda with parameters to start and stop function
 
-cron(0 8 ? * MON-FRI *) -> action 'start'
-cron(0 17 ? * MON-FRI *) -> action 'stop'
+- cron(0 8 ? * MON-FRI *) -> action 'start'
+- cron(0 17 ? * MON-FRI *) -> action 'stop'
